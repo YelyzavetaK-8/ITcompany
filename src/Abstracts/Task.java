@@ -1,8 +1,8 @@
-package Abstracts;
+package abstracts;
 
-import Enums.Priority;
-import Enums.Status;
-import Interfaces.Prioritizable;
+import enums.Priority;
+import enums.Status;
+import interfaces.Prioritizable;
 
 import java.util.Objects;
 

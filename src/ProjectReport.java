@@ -1,7 +1,7 @@
 
-import Abstracts.Report;
-import Abstracts.Task;
-import Interfaces.Reportable;
+import abstracts.Report;
+import abstracts.Task;
+import interfaces.Reportable;
 
 import java.util.List;
 

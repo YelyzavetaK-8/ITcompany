@@ -1,6 +1,12 @@
 import java.util.*;
-import Abstracts.*;
-import Enums.*;
+
+import abstracts.*;
+import enums.*;
+import exceptions.EmptyRequirementException;
+import exceptions.InvalidAmountOfTasksException;
+import exceptions.InvalidBudgetException;
+import exceptions.InvalidTaskHoursException;
+import exceptions.InvalidTaskTypeException;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,22 +20,64 @@ public class Main {
 
         System.out.println("Enter client name:");
         String clientName = scanner.nextLine();
-        Client client = new Client(1, clientName, "client@mail.com", "000", 500);
+
+        System.out.println("Enter client budget:");
+        int clientBudget =Integer.parseInt(scanner.nextLine());
+
+        Client client = null;
+
+        try {
+            if (clientBudget <= 0) {
+                throw new InvalidBudgetException("Client budget cannot be 0 or negative!");
+            }
+            client = new Client(1, clientName, "client@mail.com", "000", clientBudget);
+        } catch (InvalidBudgetException e) {
+            System.out.println("Error: " + e.getMessage());
+            return;
+        }
 
         List<Task> tasks = new ArrayList<>();
 
         System.out.println("How many tasks?");
         int n = Integer.parseInt(scanner.nextLine());
 
+        try {
+            if(n == 0){
+                throw new InvalidAmountOfTasksException("Amount of tasks cannot be 0");
+            }
+        } catch (InvalidAmountOfTasksException e) {
+            System.out.println("Error: " + e.getMessage());
+            return;
+        }
+
         for (int i = 0; i < n; i++) {
             System.out.println("Task #" + (i + 1) + " type (BUG/FEATURE):");
             String type = scanner.nextLine().toUpperCase();
+
+            try{
+                if (type != "BUG" || type != "FEATURE"){
+                    throw new InvalidTaskTypeException("Incorrect task type");
+                }
+            } catch (InvalidTaskTypeException e){
+                System.out.println("Error: " + e.getMessage());
+                return;
+            }
 
             System.out.println("Title:");
             String title = scanner.nextLine();
 
             System.out.println("Estimated hours:");
             int est = Integer.parseInt(scanner.nextLine());
+
+            try {
+                if (est <= 0){
+                    throw new InvalidTaskHoursException("Estimated hours cannot be 0");
+                }
+
+            } catch (InvalidTaskHoursException e) {
+                System.out.println("Error: " + e.getMessage());
+                return;
+            }
 
             if (type.equals("BUG")) {
                 System.out.println("Description:");
@@ -40,6 +88,7 @@ public class Main {
 
                 System.out.println("How many steps to reproduce?");
                 int stepsCount = Integer.parseInt(scanner.nextLine());
+
                 for (int s = 0; s < stepsCount; s++) {
                     System.out.println("Step #" + (s + 1) + ":");
                     bug.addStep(scanner.nextLine());
@@ -53,6 +102,16 @@ public class Main {
 
                 System.out.println("How many requirements?");
                 int reqCount = Integer.parseInt(scanner.nextLine());
+
+                try {
+                    if (reqCount <= 0){
+                        throw new EmptyRequirementException("Requiremenets cannot be empty");
+                    }
+                } catch (EmptyRequirementException e) {
+                    System.out.println("Error: " + e.getMessage());
+                    return;
+                }
+
                 List<String> reqs = new ArrayList<>();
                 for (int r = 0; r < reqCount; r++) {
                     System.out.println("Requirement #" + (r + 1) + ":");
@@ -63,7 +122,7 @@ public class Main {
             }
         }
 
-        ITProject project = new ITProject(1, "Internal App", tasks, 0, client, 500);
+        ITProject project = new ITProject(1, "Internal App", tasks, 0, client, clientBudget);
 
         int totalTasksCost = tasks.stream().mapToInt(Task::getTaskEstimation).sum();
         int totalSalaries = employees.stream().mapToInt(Employee::calculateSalary).sum();
@@ -81,7 +140,9 @@ public class Main {
             if (t instanceof Bug) {
                 Bug b = (Bug) t;
                 List<String> steps = new ArrayList<>();
-                for (String s : b.getStepsToReproduce()) if (s != null) steps.add(s);
+                for (String s : b.getStepsToReproduce())
+                    if (s != null)
+                        steps.add(s);
                 System.out.print(" Steps: " + steps);
             } else if (t instanceof Feature) {
                 Feature f = (Feature) t;

@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import Abstracts.Task;
-import Enums.Priority;
-import Enums.Status;
-import Interfaces.Taskable;
+import abstracts.Task;
+import enums.Priority;
+import enums.Status;
+import interfaces.Taskable;
 
 public class Feature extends Task implements Taskable {
 

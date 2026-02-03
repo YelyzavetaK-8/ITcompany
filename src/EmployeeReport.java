@@ -1,6 +1,6 @@
-import Abstracts.Report;
-import Interfaces.Reportable;
-import Abstracts.Employee;
+import abstracts.Employee;
+import abstracts.Report;
+import interfaces.Reportable;
 
 public class EmployeeReport extends Report implements Reportable {
 

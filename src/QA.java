@@ -1,5 +1,5 @@
-import Abstracts.Employee;
-import Enums.Position;
+import abstracts.Employee;
+import enums.Position;
 
 public class QA extends Employee {
 

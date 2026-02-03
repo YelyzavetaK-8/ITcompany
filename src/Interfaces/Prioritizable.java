@@ -1,6 +1,6 @@
-package Interfaces;
+package interfaces;
 
-import Enums.Priority;
+import enums.Priority;
 
 public interface Prioritizable {
     Priority getPriority();
