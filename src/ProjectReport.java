@@ -1,9 +1,9 @@
 
 import java.util.List;
 
-import abstracts_temp.Report;
-import abstracts_temp.Task;
-import interfaces_temp.Reportable;
+import abstracts.Report;
+import abstracts.Task;
+import interfaces.Reportable;
 
 public class ProjectReport extends Report implements Reportable {
 

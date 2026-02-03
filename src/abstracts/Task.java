@@ -1,10 +1,10 @@
-package abstracts_temp;
+package abstracts;
 
 import java.util.Objects;
 
-import enums_temp.Priority;
-import enums_temp.Status;
-import interfaces_temp.Prioritizable;
+import enums.Priority;
+import enums.Status;
+import interfaces.Prioritizable;
 
 public abstract class Task implements Prioritizable{
 

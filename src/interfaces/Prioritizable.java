@@ -1,6 +1,6 @@
-package interfaces_temp;
+package interfaces;
 
-import enums_temp.Priority;
+import enums.Priority;
 
 public interface Prioritizable {
     Priority getPriority();

@@ -1,4 +1,4 @@
-package enums_temp;
+package enums;
 
 public enum Position {
     DEV,

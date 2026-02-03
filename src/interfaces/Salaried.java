@@ -1,4 +1,4 @@
-package interfaces_temp;
+package interfaces;
 
 public interface Salaried {
     int calculateSalary();
