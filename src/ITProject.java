@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import abstracts_temp.Employee;
-import abstracts_temp.Project;
-import abstracts_temp.Task;
-import interfaces_temp.Budgetable;
+import abstracts.Employee;
+import abstracts.Project;
+import abstracts.Task;
+import interfaces.Budgetable;
 
 public class ITProject extends Project implements Budgetable {
     private final Client client;

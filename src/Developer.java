@@ -1,5 +1,5 @@
-import abstracts_temp.Employee;
-import enums_temp.Position;
+import abstracts.Employee;
+import enums.Position;
 
 public class Developer extends Employee {
 
