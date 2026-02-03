@@ -1,6 +1,6 @@
-package interfaces;
+package interfaces_temp;
 
-import enums.Status;
+import enums_temp.Status;
 
 public interface Taskable {
     int getTaskEstimation();
