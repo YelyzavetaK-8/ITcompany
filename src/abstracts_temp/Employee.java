@@ -1,9 +1,9 @@
-package abstracts;
+package abstracts_temp;
 
 import java.util.Objects;
 
-import enums.Position;
-import interfaces.Salaried;
+import enums_temp.Position;
+import interfaces_temp.Salaried;
 
 public abstract class Employee extends Human implements Salaried {
 

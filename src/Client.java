@@ -1,4 +1,4 @@
-import abstracts.Human;
+import abstracts_temp.Human;
 
 public class Client extends Human {
 
