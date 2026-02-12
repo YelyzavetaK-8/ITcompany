@@ -2,31 +2,35 @@ import abstracts.Task;
 import enums.Priority;
 import enums.Status;
 import interfaces.Taskable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-public class Bug extends Task implements Taskable{
+public class Bug extends Task implements Taskable {
 
-    private final String[] stepsToReproduce = new String[8];
-    private int count = 0;
+    private static final int MAX_STEPS = 8;
+    private final List<String> stepsToReproduce = new ArrayList<>();
 
     public Bug(int id, String title, int estimatedHours, Status status, String desc, Priority priority) {
         super(id, title, estimatedHours, status, desc, priority);
     }
 
     public void addStep(String step) {
-        stepsToReproduce[count] = step;
-        count++;
+        if (stepsToReproduce.size() < MAX_STEPS) {
+            stepsToReproduce.add(step);
+        }
     }
 
-    public String[] getStepsToReproduce() {
-        return this.stepsToReproduce;
+    public List<String> getStepsToReproduce() {
+        return Collections.unmodifiableList(stepsToReproduce);
     }
 
     @Override
     public int getTaskEstimation() {
         if (this.priority == Priority.CRITICAL)
-            return estimatedHours + 2 + count;
+            return estimatedHours + 2 + stepsToReproduce.size();
         else
-            return estimatedHours + 4 + count;
+            return estimatedHours + 4 + stepsToReproduce.size();
     }
 
     @Override

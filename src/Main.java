@@ -16,7 +16,12 @@ public class Main {
         QA qa = new QA(2, "Sophie", "sophie@mail.com", "456", 2);
         ProjectManager pm = new ProjectManager(3, "J", "pm@mail.com", "789", 5);
 
-        List<Employee> employees = Arrays.asList(dev, qa, pm);
+        EntityStore<Employee> employeeStore = new EntityStore<>();
+        employeeStore.add(dev.getId(), dev);
+        employeeStore.add(qa.getId(), qa);
+        employeeStore.add(pm.getId(), pm);
+
+        List<Employee> employees = new ArrayList<>(employeeStore.getAll());
 
         System.out.println("Enter client name:");
         String clientName = scanner.nextLine();
@@ -36,7 +41,7 @@ public class Main {
             return;
         }
 
-        List<Task> tasks = new ArrayList<>();
+        List<Task> tasks = new LinkedList<>();
 
         System.out.println("How many tasks?");
         int n = Integer.parseInt(scanner.nextLine());
@@ -112,12 +117,12 @@ public class Main {
                     return;
                 }
 
-                List<String> reqs = new ArrayList<>();
+                Set<String> reqs = new LinkedHashSet<>();
                 for (int r = 0; r < reqCount; r++) {
                     System.out.println("Requirement #" + (r + 1) + ":");
                     reqs.add(scanner.nextLine());
                 }
-                feature.addRequirements(reqs);
+                feature.addRequirements(new ArrayList<>(reqs));
                 tasks.add(feature);
             }
         }
@@ -139,11 +144,7 @@ public class Main {
             System.out.print(" - " + t.getTitle() + " [" + t.getStatus() + "] Est: " + t.getTaskEstimation() + "h");
             if (t instanceof Bug) {
                 Bug b = (Bug) t;
-                List<String> steps = new ArrayList<>();
-                for (String s : b.getStepsToReproduce())
-                    if (s != null)
-                        steps.add(s);
-                System.out.print(" Steps: " + steps);
+                System.out.print(" Steps: " + b.getStepsToReproduce());
             } else if (t instanceof Feature) {
                 Feature f = (Feature) t;
                 System.out.print(" Requirements: " + f.getRequirements());
